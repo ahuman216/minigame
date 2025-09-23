@@ -13,15 +13,31 @@ def printcorrect(g,r):
         else:
             output+=f"{guesslist[i]}❌ "
     return output
-guess = input("Welcome to the hacker bank: Enter the hacked passcode (X X X X X): \n").strip()
-gl = guess.split(" ")
-guesslist = [int(x) for x in gl]
+while True:
+    try:
+        guess = input("Welcome to the hacker bank: Enter the hacked passcode (X X X X X): \n").strip()
+        gl = guess.split(" ")
+        guesslist = [int(x) for x in gl]
+        if len(gl)<=4:
+            raise Exception
+        break
+    except:
+        print("Not a valid input, try again")
+    
 tries = 1
 print(printcorrect(guesslist,reallist))
 while not guesslist==reallist:
-    guess = input("Enter the hacked passcode (X X X X X): \n").strip()
-    gl = guess.split()
-    guesslist = [int(x) for x in gl]
+    
+    while True:
+        try:
+            guess = input("Enter the hacked passcode (X X X X X): \n").strip()
+            gl = guess.split(" ")
+            guesslist = [int(x) for x in gl]
+            if len(guesslist<5):
+                raise Exception
+        except:
+            print("Not a valid input, try again")
+        break
     tries +=1
     print(printcorrect(guesslist,reallist))
 print(f"Congratulations! You got it and it took you {tries} tries!")
