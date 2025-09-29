@@ -16,7 +16,7 @@ def passwordGame():
         return output
     while True:
         try:
-            guess = input("Welcome to the hacker bank: Enter the hacked passcode (X X X X X): \n").strip()
+            guess = input("Welcome to the hacker bank: Enter the hacked passcode! (X X X X X): \n").strip()
             gl = guess.split(" ")
             if len(gl)<=4:
                 raise Exception
@@ -33,7 +33,7 @@ def passwordGame():
         
         while True:
             try:
-                guess = input("Enter the hacked passcode (X X X X X): \n").strip()
+                guess = input("Enter the hacked passcode! (X X X X X): \n").strip()
                 gl = guess.split(" ")
                 guesslist = [int(x) for x in gl]
                 if len(guesslist<5):

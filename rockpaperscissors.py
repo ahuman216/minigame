@@ -60,8 +60,8 @@ while playerscore<3 and compscore<3:
         compscore+=1
     print("Your score is ",playerscore, "and the computer's score is",compscore)
     rounds+=1
-    print("The number of rounds we played is", rounds,"\n")
-
+    print("The number of rounds we played is", rounds,"\n!")
+    
 if compscore==3:
     print("The computer won after ",rounds, "rounds!")
 else:
