@@ -1,4 +1,4 @@
-#password game
+""" #password game
 import random
 reallist = []
 for i in range(5):
@@ -17,10 +17,12 @@ while True:
     try:
         guess = input("Welcome to the hacker bank: Enter the hacked passcode (X X X X X): \n").strip()
         gl = guess.split(" ")
-        guesslist = [int(x) for x in gl]
         if len(gl)<=4:
             raise Exception
+        guesslist = [int(x) for x in gl] 
         break
+
+        
     except:
         print("Not a valid input, try again")
     
@@ -40,5 +42,10 @@ while not guesslist==reallist:
         break
     tries +=1
     print(printcorrect(guesslist,reallist))
-print(f"Congratulations! You got it and it took you {tries} tries!")
+print(f"Congratulations! You got it and it took you {tries+1} tries!")
 
+ """
+
+import passwordguess as pd
+
+pd.passwordGame()
