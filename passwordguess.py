@@ -1,46 +1,45 @@
 #password game
-def passwordGame():
-    import random
-    reallist = []
-    for i in range(5):
-        reallist.append(random.randint(0,9))
-    def printcorrect(g,r):
+import random
+class passwordGame():
+    
+    def __init__(self):
+        self.reallist = []
+        self.tries = 0
+        self.gameover = False
+        self.message = "Welcome to the hacker bank! Enter the hacked passcode (X X X X X)."
+    
+    def start_game(self):
+        # initialize fresh list each time a new game starts
+        self.reallist = []
+        for i in range(5):
+            self.reallist.append(random.randint(0,9))
+        self.tries = 0
+        self.gameover = False
+        self.message = "Game started! Enter 5 numbers separated by spaces. "
+        return self.message
+    def printcorrect(self, g):
         output = ""
         for i in range(5):
-            if reallist[i] == int(guesslist[i]):
-                output+=f"{reallist[i]}✅ "
-            elif int(guesslist[i]) in reallist:
-                output+=f"{guesslist[i]}🟨 "
+            if self.reallist[i] == int(g[i]):
+                output+=f"{self.reallist[i]}✅ "
+            elif int(g[i]) in self.reallist:
+                output+=f"{g[i]}🟨 "
             else:
-                output+=f"{guesslist[i]}❌ "
-        return output
-    while True:
+                output+=f"{g[i]}❌ "
+        return output.strip()
+    def makeguess(self,guess):
+        if self.gameover:
+            return f"Game over! The password was {''.join(map(str,self.reallist))}."
         try:
-            guess = input("Welcome to the hacker bank: Enter the hacked passcode! (X X X X X): \n").strip()
-            gl = guess.split(" ")
-            if len(gl)<=4:
-                raise Exception
-            guesslist = [int(x) for x in gl] 
-            break
-
-            
+            guesslist = [int(x) for x in guess.split()]
+            if len(guesslist) != 5:
+                return "Invalid input! Please enter 5 numbers separated by spaces."
         except:
-            print("Not a valid input, try again")
-        
-    tries = 1
-    print(printcorrect(guesslist,reallist))
-    while not guesslist==reallist:
-        
-        while True:
-            try:
-                guess = input("Enter the hacked passcode! (X X X X X): \n").strip()
-                gl = guess.split(" ")
-                guesslist = [int(x) for x in gl]
-                if len(guesslist<5):
-                    raise Exception
-            except:
-                print("Not a valid input, try again")
-            break
-        tries +=1
-        print(printcorrect(guesslist,reallist))
-    print(f"Congratulations! You got it and it took you {tries} tries!")
+            return "Invalid input! Please enter numbers only."
+        self.tries+=1
+        feedback = self.printcorrect(guesslist)
+        if guesslist == self.reallist:
+            self.gameover=True
+            return f"{feedback}\n CONGRATULATIONS! You cracked the code in {self.tries} tries!"
+        else:
+            return f"{feedback}\n Try again =("

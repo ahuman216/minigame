@@ -1,7 +1,52 @@
-def rpsgame():
-
-        import random
-        playerscore = 0
+import random
+class rockPaperScissors:
+    def __init__(self):
+        self.playerscore = 0
+        self.compscore = 0
+        self.rounds = 0
+        self.gameover = False
+        self.message = "Let's play Rock Paper Scissors! First to 3 wins."
+    def start_game(self):
+        self.playerscore=0
+        self.compscore=0
+        self.rounds = 0
+        self.gameover=False
+        self.message = "Game started! Choose rock, paper or scissors!"
+        return self.message
+    def computerturn(self):
+        num = random.randint(1,3)
+        return ["Rock", "Paper", "Scissors"][num-1]
+    def whowins(self, comp, player):
+        if (comp ==player):
+            return "It's a tie!"
+        if comp =="Rock":
+            return "You win this round!" if player=="Paper" else "The computer wins this round!"
+        if comp == "Paper":
+            return "You win this round!" if player =="Scissors" else "The computer wins this round!"
+        if comp == "Scissors":
+            return "You win this round!" if player == "Rock" else "The computer wins this round!"
+    def makemove(self, playerchoice):
+        if self.gameover:
+            return "Game over! Start a new game."
+        playerchoice = playerchoice.capitalize()
+        if playerchoice not in ["Rock", "Paper", "Scissors"]:
+            return "Invalid choice. Pick rock paper or scissors"
+        compchoice = self.computerturn()
+        winner = self.whowins(compchoice, playerchoice)
+        if winner =="You win this round!":
+            self.playerscore+=1
+        elif winner == "The computer wins this round!":
+            self.compscore+=1
+        self.rounds+=1
+        if self.playerscore==3 or self.compscore==3:
+            self.gameover=True
+            if self.playerscore==3:
+                return f"{winner}\n You won after {self.rounds} rounds!"
+            else:
+                return f"{winner}\n The computer won after {self.rounds} rounds!"
+        return f"{winner}\n Your score: {self.playerscore}, Computer score: {self.compscore}, Rounds: {self.rounds}"
+        
+"""         playerscore = 0
         compscore = 0
         rounds = 0
 
@@ -76,3 +121,4 @@ def rpsgame():
         else:
             print("You won after", rounds,"rounds!")
 
+ """

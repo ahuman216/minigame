@@ -1,4 +1,105 @@
-def hangman():
+from wonderwords import RandomWord
+class HangmanGame:
+    def __init__(self):
+        self.hgstep = hgstep = [
+    '''------
+    |    |
+    |
+    |
+    |
+    |
+    |
+    ---------------''', 
+    '''------
+    |    |
+    |   ( )
+    |
+    |
+    |
+    |
+    ---------------''',
+    '''------
+    |    |
+    |   ( )
+    |    |
+    |    |
+    |
+    |
+    ---------------''',
+    '''------
+    |    |
+    |   ( )
+    |    |/
+    |    |
+    |   
+    |
+    ---------------''',
+    '''------
+    |    |
+    |   ( )
+    |   \|/
+    |    |
+    |   
+    |
+    ---------------''',
+    '''------
+    |    |
+    |   ( )
+    |   \|/
+    |    |
+    |   /
+    |
+    ---------------''',
+    '''------
+    |    |
+    |   ( )
+    |   \|/
+    |    |
+    |   / \\
+    |
+    ---------------''']
+        self.word = ""
+        self.wordlist = []
+        self.guessedlist = []
+        self.errornum=0
+        self.gameover = False
+        self.message = "Welcome to Hangman! Start a new game."
+    def start_game(self):
+        r = RandomWord()
+        self.word = r.word()
+        self.wordlist=list(self.word)
+        self.guessedlist= ["_ "]*len(self.word)
+        self.errornum = 0
+        self.gameover = False
+        self.message = f"Game started! Word length {len(self.word)}. Guess a letter."
+        return self.message
+    def makeguess(self, letter):
+        if self.gameover:
+            return f"Game over. The word was {self.word}"
+        if not letter.isalpha() or len(letter)!=1:
+            return "Invalid input! Enter a single letter!"
+        letter = letter.lower()
+        output = self.hgstep[self.errornum]+"\n"
+        if letter in self.wordlist:
+            for i in range(len(self.wordlist)):
+                if self.wordlist[i] ==letter:
+                    self.guessedlist[i]=letter
+            output+= " ".join(self.guessedlist)+"\n"
+            if self.wordlist==self.guessedlist:
+                self.gameover=True
+                return output + f"You did it! The word was {self.word}"
+            return output+" Correct guess!"
+        else:
+            if self.errornum ==6:
+                self.gameover=True
+                return output + f"You DIED! The word was {self.word}"
+            else:
+                self.errornum+=1
+                output = self.hgstep[self.errornum]+"\n"+ " ".join(self.guessedlist)+ "\n"
+                return output
+
+
+"""def hangman():
     
     from wonderwords import RandomWord
     hgstep = [
@@ -106,3 +207,4 @@ def hangman():
         if(wordlist==guessedlist):
             print("You did it!")
             break
+"""

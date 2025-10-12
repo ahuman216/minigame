@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Play Games</title>
+    </head>
+    <body>
+        <h1>Welcome to the Game Hub!</h1>
+        <h2>Password Hack</h2>
+        <button onclick = "startPasswordGame()">Start Password Game</button>
+        <input type = "text" id = "passwordGuess"
+        placeholder = "Enter 5 numbers">
+        <button onclick = "guessPassword()">Submit Guess</button>
+        <p id = "passwordOutput"></p>
+
+        <h2>Rock Paper Scissors</h2>
+        <button onclick = "startRPSGame()">Start RPS Game</button>
+        <input type = "text" id = "rpsChoice"
+        placeholder = "Rock, Paper, or Scissors">
+        <button onclick = "playRPS()">Play</button>
+        <p id = "rpsOutput"></p>
+
+        <h2>Hangman</h2>
+        <button onclick = "startHangmanGame()">Start Hangman Game</button>
+        <input type = "text" id = "hangmanLetter"
+        placeholder = "Enter a letter">
+        <button onclick = "guessHangman()">Submit Letter</button>
+        <pre id = "hangmanOutput"></pre>
+
+
+        <script>
+            function startPasswordGame(){
+                fetch('/start-password-game', {method: 'POST'})
+                .then(r=>r.json())
+                .then(d=>
+                    document.getElementById('passwordOutput').innerText = d.message);
+            }
+            function guessPassword(){
+                const guess = document.getElementById('passwordGuess').value;
+                fetch('/guess-password',{
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({guess:guess})
+                })
+                .then(r=>r.json())
+                .then(d=> document.getElementById('passwordOutput').innerText=d.message);
+            }
+                
+    function startRPSGame() {
+                fetch('/start-rps-game', {method: 'POST'})
+                .then(r => r.json())
+                .then(d => document.getElementById('rpsOutput').innerText = d.message);
+            }
+            function playRPS() {
+                const choice = document.getElementById('rpsChoice').value;
+                fetch('/play-rps', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({"choice": choice})
+                })
+                .then(r => r.json())
+                .then(d => document.getElementById('rpsOutput').innerText = d.message);
+            }
+    
+    function startHangmanGame() {
+                fetch('/start-hangman-game', {method: 'POST'})
+                .then(r => r.json())
+                .then(d => document.getElementById('hangmanOutput').innerText = d.message);
+            }
+            function guessHangman() {
+                const letter = document.getElementById('hangmanLetter').value;
+                fetch('/guess-hangman', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({letter: letter})
+                })
+                .then(r => r.json())
+                .then(d => document.getElementById('hangmanOutput').innerText = d.message);
+            }
+
+        </script>
+    </body>
+</html>

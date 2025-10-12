@@ -6,8 +6,29 @@
     </head>
 
     <body>
+        
+        </script>
         <h1>MY FIRST WEBSITE</h1>
         <h2>hi</h2>
+
+        <h2>Password Hack Game</h2>
+        <button onclick="startPasswordGame()">Start Game</button>
+        <input type = "text" id = "passwordGuess"
+        placeholder = "Enter 5 numbers">
+        <button onclick ="guessPassword()">Submit Guess</button>
+        <p id = "passwordOutput"></p>
+
+        <script>
+            function startPasswordGame(){
+                fetch('/start-password-game',{method: 'POST'})
+                .then(response => response.json())
+                .then(data =>{
+                    document.getElementById('passwordOutput').innerText = data.message;
+                });
+            }
+        </script>
+
+
 
         <p>PARAGRAPH</p>
 
