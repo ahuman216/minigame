@@ -2,10 +2,27 @@
 <html>
     <head>
         <title>Play Games</title>
+        <style>
+        img {
+            float: right;
+        }
+        </style>
+        <style>
+        body {
+            background-color: rgb(225, 157, 186);
+        }
+        </style>
     </head>
     <body>
-        <h1>Welcome to the Game Hub!</h1>
+        <img src = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHN5NW1ya29udXd3aGI0dms0NTUwenkxM3o2YnJ4dmZyMnJieTFuMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ZyVko9PjgCUKMQDLb/giphy.gif" border = "10">
+        <h1>Welcome to the Game Hub!</h1>    
+        <p>To play a game, pick any game you would like and click the start button</p>
+        <p>Once you receive confirmation that your game has started, you can start playing!</p>
+        <h2>HAVE FUN!</h2>
+        <br>
+
         <h2>Password Hack</h2>
+        <p>This is a game to test out your hacking skills! There is a secret passcode and YOU have to guess it in the least amount of guesses! If a number shows up with a green check mark, it is in the correct place, if it has a yellow dot, it is in the password, but in the wrong place, and if there is a red cross, it is not a part of your password! Happy guessing!</p>
         <button onclick = "startPasswordGame()">Start Password Game</button>
         <input type = "text" id = "passwordGuess"
         placeholder = "Enter 5 numbers">
@@ -13,6 +30,7 @@
         <p id = "passwordOutput"></p>
 
         <h2>Rock Paper Scissors</h2>
+        <p>This is a fun version of the classic rock paper scissor game, but instead of playing against another person, you are playing against the computer. Enter your pick, and first to 3 wins!</p>
         <button onclick = "startRPSGame()">Start RPS Game</button>
         <input type = "text" id = "rpsChoice"
         placeholder = "Rock, Paper, or Scissors">
@@ -20,12 +38,12 @@
         <p id = "rpsOutput"></p>
 
         <h2>Hangman</h2>
+        <p>This is a classic game, you have until the man is hung to keep guessing letters and try to guess the word. Just enter a letter to begin guessing to save the man!</p>
         <button onclick = "startHangmanGame()">Start Hangman Game</button>
         <input type = "text" id = "hangmanLetter"
         placeholder = "Enter a letter">
         <button onclick = "guessHangman()">Submit Letter</button>
         <pre id = "hangmanOutput"></pre>
-
 
         <script>
             function startPasswordGame(){
